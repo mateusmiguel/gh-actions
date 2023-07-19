@@ -17,13 +17,13 @@ jobs:
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3.7.1
         with:
-          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
 
       - name: create release
         uses: actions/create-release@v1
       
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
