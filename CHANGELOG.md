@@ -1,4 +1,13 @@
-# 1.1.0 (2023-07-19)
+## [1.1.1](https://github.com/mateusmiguel/gh-actions/compare/v1.1.0...v1.1.1) (2023-07-19)
+
+
+### Bug Fixes
+
+* updating github token ([8d4fdc4](https://github.com/mateusmiguel/gh-actions/commit/8d4fdc456c13a5301384bf8582a36cc4a6fc7aa7))
+
+
+
+# [1.1.0](https://github.com/mateusmiguel/gh-actions/compare/85f59f978041ca8484b27be68064a5dc71c22540...v1.1.0) (2023-07-19)
 
 
 ### Bug Fixes
