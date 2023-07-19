@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       
       - name: conventional Changelog Action
         id: changelog
@@ -27,4 +27,4 @@ jobs:
         with:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }
+          body: ${{ steps.changelog.outputs.clean_changelog }}
