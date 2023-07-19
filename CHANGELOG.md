@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/mateusmiguel/gh-actions/compare/v1.1.1...v1.2.0) (2023-07-19)
+
+
+### Features
+
+* add new function ([7b3d1d7](https://github.com/mateusmiguel/gh-actions/commit/7b3d1d75af5f975bbfbc79075b4f9714f297e188))
+
+
+
 ## [1.1.1](https://github.com/mateusmiguel/gh-actions/compare/v1.1.0...v1.1.1) (2023-07-19)
 
 
