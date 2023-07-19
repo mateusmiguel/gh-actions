@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/mateusmiguel/gh-actions/compare/v1.2.0...v2.1.0) (2023-07-19)
+
+
+### Features
+
+* adding react ([057e65a](https://github.com/mateusmiguel/gh-actions/commit/057e65a5aa27c9b3ab70e5191bae87a598bf8ccc))
+
+
+
 # [1.2.0](https://github.com/mateusmiguel/gh-actions/compare/v1.1.1...v1.2.0) (2023-07-19)
 
 
