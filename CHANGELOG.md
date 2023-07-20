@@ -1,3 +1,18 @@
+# [2.3.0](https://github.com/mateusmiguel/gh-actions/compare/v2.2.0...v2.3.0) (2023-07-20)
+
+
+### Bug Fixes
+
+* fix ([20753d0](https://github.com/mateusmiguel/gh-actions/commit/20753d00a88bf421c5029ba39fbc3bc18832c009))
+
+
+### Features
+
+* test ([56c7928](https://github.com/mateusmiguel/gh-actions/commit/56c79284be26c486113cfb1ee1ed68817ee8fda0))
+* test ([7e89ff2](https://github.com/mateusmiguel/gh-actions/commit/7e89ff25b0829cba85a51b6692d5f60c4074cb6c))
+
+
+
 # [2.2.0](https://github.com/mateusmiguel/gh-actions/compare/v2.1.0...v2.2.0) (2023-07-20)
 
 
@@ -31,22 +46,6 @@
 ### Bug Fixes
 
 * updating github token ([8d4fdc4](https://github.com/mateusmiguel/gh-actions/commit/8d4fdc456c13a5301384bf8582a36cc4a6fc7aa7))
-
-
-
-# [1.1.0](https://github.com/mateusmiguel/gh-actions/compare/85f59f978041ca8484b27be68064a5dc71c22540...v1.1.0) (2023-07-19)
-
-
-### Bug Fixes
-
-* :fire: fix github action ([d9aacdf](https://github.com/mateusmiguel/gh-actions/commit/d9aacdffe9a31b088400bfcf84ff7df58cfe09ed))
-* updating github token ([8f23d02](https://github.com/mateusmiguel/gh-actions/commit/8f23d021ecd9723e9a58e3cecde714337f55a69b))
-
-
-### Features
-
-* :rocket: init project ([64da6cd](https://github.com/mateusmiguel/gh-actions/commit/64da6cd98fe17754943e99f984f807df3a998c12))
-* adding github actions ([85f59f9](https://github.com/mateusmiguel/gh-actions/commit/85f59f978041ca8484b27be68064a5dc71c22540))
 
 
 
