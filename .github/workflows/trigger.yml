@@ -5,6 +5,9 @@ on:
     workflows: ["Create Tag"]
     types:
       - completed
+  push:
+    branches:
+      - development
 
 jobs:
   trigger-on-success:
@@ -15,3 +18,12 @@ jobs:
 
       - name: Trigger on Success
         run: echo "O workflow Create Tag foi executado com sucesso!"
+
+  trigger-on-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger on Push to Development
+        run: echo "Houve um push na branch development!"
