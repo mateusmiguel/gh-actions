@@ -10,20 +10,6 @@ on:
       - development
 
 jobs:
-  create-tag:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.github_token}}
-          default_bump: patch
-
   deploy-dev:
     if: github.ref == 'refs/heads/development'
     runs-on: ubuntu-latest
@@ -33,17 +19,14 @@ jobs:
 
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/')
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16.17.0
-
       - name: create release
         uses: actions/create-release@v1
         env:
