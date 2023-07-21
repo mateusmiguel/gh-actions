@@ -1,14 +1,12 @@
 name: Release and deploy
 
 on:
-  workflow_run:
-    workflows: ["Create Tag"]
-    types:
-      - completed
   push:
     branches:
       - development
-
+    tags:
+      - '*'
+      
 jobs:
   deploy-dev:
     if: github.ref == 'refs/heads/development'
@@ -19,16 +17,17 @@ jobs:
 
   deploy-prod:
     if: startsWith(github.ref, 'refs/tags/')
+
     runs-on: ubuntu-latest
     steps:
-      - name: Debug
-        run: echo "Github ref - ${{ github.ref }}"      
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16.17.0
+
       - name: create release
         uses: actions/create-release@v1
         env:
