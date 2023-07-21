@@ -1,0 +1,17 @@
+name: Trigger on Success
+
+on:
+  workflow_run:
+    workflows: ["Create Tag"]
+    types:
+      - completed
+
+jobs:
+  trigger-on-success:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger on Success
+        run: echo "O workflow Create Tag foi executado com sucesso!"
