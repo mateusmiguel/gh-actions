@@ -1,4 +1,4 @@
-name: Trigger on Success
+name: Release and Deploy
 
 on:
   workflow_run:
