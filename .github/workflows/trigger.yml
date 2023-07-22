@@ -10,16 +10,17 @@ on:
       - development
 
 jobs:
-  trigger-on-success:
+  deploy-prod:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Trigger on Success
+      - name: Trigger - Deploy Prod
         run: echo "O workflow Create Tag foi executado com sucesso!"
 
-  trigger-on-push:
+  deploy-dev:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/development'
 
@@ -27,5 +28,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Trigger on Push to Development
+      - name: Trigger - Push Development
         run: echo "Houve um push na branch development!"
