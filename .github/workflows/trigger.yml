@@ -30,9 +30,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: Release ${{ github.ref }}
+          tag_name: ${{ github.ref_path }}
+          release_name: Release ${{ github.ref_path }}
+          body: Release ${{ github.ref_path }}
       
       - name: Trigger - Deploy Prod
         run: echo "Release e deploy ok!"
