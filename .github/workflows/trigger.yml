@@ -1,36 +1,57 @@
-name: Release and Deploy
+name: Create Tag, Release and Deploy
 
 on:
-  workflow_run:
-    workflows: ["Create Tag"]
-    types:
-      - completed
   push:
     branches:
+      - main
       - development
 
 jobs:
-  deploy-to-production:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  create-tag:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
         with:
-          name: version
+          github_token: ${{ secrets.github_token}}
+          default_bump: patch
 
-      - name: Set version
-        id: version
-        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+  deploy-to-production:
+    if: github.ref == 'refs/heads/main' && needs.create-tag.outputs.tag_version != ''
+    needs: create-tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Trigger - Initing deploy
+        run: echo "Iniciando release e deploy..."
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.17.0
+      
       - name: create release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
-          tag_name: ${{ env.VERSION }}
-          release_name: ${{ env.VERSION }}
-          body: Release ${{ env.VERSION }}
+          tag_name: ${{ needs.create-tag.outputs.tag_version }}
+          release_name: ${{ needs.create-tag.outputs.tag_version }}
+          body: ${{ needs.create-tag.outputs.clean_changelog }}
+
+  deploy-to-development:
+    if: github.ref == 'refs/heads/development'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger - Push Development
+        run: echo "Houve um push na branch development!"
