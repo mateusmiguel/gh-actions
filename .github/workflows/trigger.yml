@@ -17,30 +17,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Trigger - Initing deploy
-        run: echo "Iniciando release e deploy..."
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
         with:
-          node-version: 16.17.0
-      
+          name: version
+
+      - name: Set version
+        id: version
+        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+
       - name: create release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
-          tag_name: ${{ steps.tag_version.outputs.tag }}
-          release_name: ${{ steps.tag_version.outputs.tag }}
-          body: ${{ steps.tag_version.outputs.clean_changelog }}
-
-  deploy-to-development:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/development'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Trigger - Push Development
-        run: echo "Houve um push na branch development!"
+          tag_name: ${{ env.VERSION }}
+          release_name: ${{ env.VERSION }}
+          body: Release ${{ env.VERSION }}
