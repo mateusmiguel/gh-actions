@@ -28,18 +28,9 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
 
-      - name: Create Release and Upload Artifacts
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-          with:
-          tag_name: ${{ github.ref_name }}  # Use 'github.ref_name' instead of 'github.ref'
-          name: Release ${{ github.ref_name }}  # Use 'github.ref_name' instead of 'github.ref'
-          draft: false
-          prerelease: false
-
-      - name: Trigger - Deploy Prod
-        run: echo "Release e deploy sucesso!"
+      - name: Release
+        uses: softprops/action-gh-release@v1      
+      
 
   deploy-to-development:
     runs-on: ubuntu-latest
