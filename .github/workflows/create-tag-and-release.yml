@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - development
 
 jobs:
   create-tag-and-release:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,3 +28,14 @@ jobs:
           files: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-to-development:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger - Push Development
+        run: echo "Houve um push na branch development!"
