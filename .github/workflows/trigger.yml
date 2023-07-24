@@ -27,10 +27,16 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v3.7.1
         with:
           github-token: ${{ secrets.github_token }}
-
+          output-file: 'CHANGELOG.md'
+          version-file: 'VERSION'
+   
       - name: Release
-        uses: softprops/action-gh-release@v1      
-      
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-to-development:
     runs-on: ubuntu-latest
