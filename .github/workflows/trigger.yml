@@ -28,7 +28,7 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           output-file: 'CHANGELOG.md'
-          version-file: 'VERSION'
+          version-file: 'package.json'
    
       - name: Release
         uses: softprops/action-gh-release@v1
