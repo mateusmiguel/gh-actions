@@ -73,13 +73,3 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
-
-  deploy-to-development:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/development'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Trigger - Push Development
-        run: echo "Houve um push na branch development!"

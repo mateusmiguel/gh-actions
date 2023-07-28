@@ -1,0 +1,17 @@
+name: Development Workflow
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  deploy-to-development:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger - Push Development
+        run: echo "Houve um push na branch development!"
