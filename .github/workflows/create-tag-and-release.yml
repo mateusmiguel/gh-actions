@@ -14,13 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.github_token}}
-          default_bump: patch
-      
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -29,6 +22,13 @@ jobs:
       - name: Build React
         run: npm install && npm run build
       
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.github_token}}
+          default_bump: patch      
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
