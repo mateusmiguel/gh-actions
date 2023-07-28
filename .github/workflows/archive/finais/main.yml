@@ -2,8 +2,8 @@ name: Production Workflow
 
 on:
   push:
-    tags:        
-      - '*'           # Push events to every tag not containing /
+    branches:
+      - main
 
 jobs:
   build:
