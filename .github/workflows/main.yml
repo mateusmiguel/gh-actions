@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - main
-      - development
 
 jobs:
-  build-prod:
+  build:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
@@ -28,8 +27,8 @@ jobs:
           name: build-artifacts
           path: dist
 
-  create-tag-and-release-prod:
-    needs: build-prod
+  create-tag-and-release:
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
@@ -48,8 +47,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy-prod:
-    needs: create-tag-and-release-prod
+  deploy:
+    needs: create-tag-and-release
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
