@@ -22,6 +22,12 @@ jobs:
       - name: Build React
         run: npm install && npm run build
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: dist
+
   create-tag-and-release-prod:
     needs: build-prod
     runs-on: ubuntu-latest
@@ -47,6 +53,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifacts
+          path: dist
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
