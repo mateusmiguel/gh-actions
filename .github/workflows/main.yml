@@ -26,25 +26,48 @@ jobs:
           name: build-artifacts
           path: dist
 
+  # create-tag-and-release:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Bump version and push tag
+  #       id: tag_version
+  #       uses: mathieudutour/github-tag-action@v6.1
+  #       with:
+  #         github_token: ${{ secrets.github_token}}
+  #         default_bump: patch
+
+  #     - name: Create Release
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         tag_name: ${{ steps.tag_version.outputs.new_tag }}
+  #         files: CHANGELOG.md
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   create-tag-and-release:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
+      - name: conventional changelog action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@latest
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create a GitHub release
-        uses: ncipollo/release-action@v1
+      - name: create release
+        uses: softprops/action-gh-release@v1
+        if: ${{steps.changelog.outputs.skipped == 'false'}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
-          bodyFile: "changelog.md"
-
-  
+            tag_name: ${{ steps.changelog.outputs.tag }}
+            name: ${{ steps.changelog.outputs.tag }}
+            body: ${{steps.changelog.outputs.clean_changelog}}
+            draft: false
+            prerelease: false
+        
+        
   deploy:
     needs: create-tag-and-release
     runs-on: ubuntu-latest
