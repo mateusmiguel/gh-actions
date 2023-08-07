@@ -1,0 +1,13 @@
+name: Print Message on Main Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  print-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Message
+        run: echo "Push event on main branch"
